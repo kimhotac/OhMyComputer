@@ -6,6 +6,7 @@ public class comController : MonoBehaviour
 {
     private Camera mainCamera;
     private Vector2 screenBounds;
+    GameObject director;
     float speed = 0;
     Vector2 startPos;
 
@@ -15,14 +16,17 @@ public class comController : MonoBehaviour
         if (other.gameObject.tag == "water")
         {
             Debug.Log("Tag=water");
+            this.director.GetComponent<GameDirector>().stop();
         }
         else
         {
+            this.director.GetComponent<GameDirector>().Getelectric();
             Debug.Log("Tag=electric");
         }
     }
     void Start()
     {
+        this.director = GameObject.Find("GameDirector");
         mainCamera = Camera.main;
         screenBounds = mainCamera.ScreenToWorldPoint(new Vector3(Screen.width, Screen.height, mainCamera.transform.position.z));
         Application.targetFrameRate = 60;
