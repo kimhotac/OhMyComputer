@@ -10,6 +10,17 @@ public class comController : MonoBehaviour
     Vector2 startPos;
 
     // Start is called before the first frame update
+    void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.tag == "water")
+        {
+            Debug.Log("Tag=water");
+        }
+        else
+        {
+            Debug.Log("Tag=electric");
+        }
+    }
     void Start()
     {
         mainCamera = Camera.main;
@@ -35,6 +46,17 @@ public class comController : MonoBehaviour
             // 스와이프 길이를 처음 속도로 변환한다
             this.speed = swipeLength / 500.0f;
         }
+        //왼쪽 화살표가 눌렸을때
+        if (Input.GetKeyDown(KeyCode.LeftArrow))
+        {
+            transform.Translate(-2,0,0);
+        }
+        //오른쪽 화살표가 눌렸을때
+        if (Input.GetKeyDown(KeyCode.RightArrow))
+        {
+            transform.Translate(2,0,0);
+        }
+
 
         transform.Translate(this.speed, 0, 0);  // 이동
         this.speed *= 0.98f;                    // 감속
