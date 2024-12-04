@@ -32,7 +32,7 @@ public class dropitemcontroller : MonoBehaviour
         if (d < r1 + r2)
         {
             GameObject director = GameObject.Find("GameDirector");
-            //director.GetComponent<GameDirector>().DecreaseHp();
+            director.GetComponent<GameDirector>().DecreaseBattery();
 
             Destroy(gameObject);
         }

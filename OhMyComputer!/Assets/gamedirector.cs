@@ -5,18 +5,24 @@ using UnityEngine.UI;
 
 public class GameDirector : MonoBehaviour
 {
-    GameObject hpGauge;
+    GameObject batteryUI;
     // Start is called before the first frame update
     void Start()
     {
-        this.hpGauge = GameObject.Find("hpGauge");
+        this.batteryUI = GameObject.Find("battery1");
+        InvokeRepeating("DecreaseBattery", 1f, 1f); // 1초 후부터 매초마다 실행
     }
-    public void DecreaseHp()
+    public void DecreaseBattery()
     {
-        this.hpGauge.GetComponent<Image>().fillAmount -= 0.1f;
+        this.batteryUI.GetComponent<Image>().fillAmount -= 0.1f;
     }
     // Update is called once per frame
-    void Update()
+
+    void stop()
+    {
+        CancelInvoke("DecreaseBattery"); // 반복 호출 취소
+    }
+    void update()
     {
 
     }
