@@ -10,22 +10,6 @@ public class comController : MonoBehaviour
     float speed = 0;
     Vector2 startPos;
 
-    // Start is called before the first frame update
-    void OnTriggerEnter2D(Collider2D other)
-    {
-        Debug.Log("트리거 작동?");
-        if (other.gameObject.tag == "water")
-        {
-            Debug.Log("Tag=water");
-            this.director.GetComponent<GameDirector>().stop();
-        }
-        else
-        {
-            this.director.GetComponent<GameDirector>().Getelectric();
-            Debug.Log("Tag=electric");
-        }
-        Destroy(other.gameObject);
-    }
     void Start()
     {
         this.director = GameObject.Find("GameDirector");
@@ -78,5 +62,21 @@ public class comController : MonoBehaviour
         {
             this.speed =-this.speed;
         }
+    }
+
+    // 2D충돌판정
+    void OnTriggerEnter2D(Collider2D other)
+    {
+        //물인 경우
+        if (other.gameObject.tag == "water")
+        {
+            this.director.GetComponent<GameDirector>().stop();
+        }
+        // 나머지 경우
+        else
+        {
+            this.director.GetComponent<GameDirector>().Getelectric();
+        }
+        Destroy(other.gameObject);
     }
 }
