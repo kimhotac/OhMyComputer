@@ -11,8 +11,9 @@ public class comController : MonoBehaviour
     Vector2 startPos;
 
     // Start is called before the first frame update
-    void OnTriggerEnter(Collider other)
+    void OnTriggerEnter2D(Collider2D other)
     {
+        Debug.Log("트리거 작동?");
         if (other.gameObject.tag == "water")
         {
             Debug.Log("Tag=water");
@@ -23,6 +24,7 @@ public class comController : MonoBehaviour
             this.director.GetComponent<GameDirector>().Getelectric();
             Debug.Log("Tag=electric");
         }
+        Destroy(other.gameObject);
     }
     void Start()
     {
@@ -35,6 +37,8 @@ public class comController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+
+        // 스와이프 컨트롤
         // 스와이프의 길이를 구한다
         if (Input.GetMouseButtonDown(0))
         {
@@ -50,6 +54,8 @@ public class comController : MonoBehaviour
             // 스와이프 길이를 처음 속도로 변환한다
             this.speed = swipeLength / 500.0f;
         }
+
+        //키보드 컨트롤
         //왼쪽 화살표가 눌렸을때
         if (Input.GetKeyDown(KeyCode.LeftArrow))
         {
@@ -68,7 +74,7 @@ public class comController : MonoBehaviour
         Vector3 objPosition = transform.position;
 
         if ((objPosition.x > screenBounds.x && this.speed > 0)
-            || (objPosition.x < -screenBounds.x && this.speed < 0))
+            || (objPosition.x < -screenBounds.x && this.speed < 0)) // 화면 바깥으로 나가게 되었을 경우
         {
             this.speed =-this.speed;
         }
