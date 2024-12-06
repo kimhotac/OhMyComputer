@@ -34,10 +34,13 @@ public class GameDirector : MonoBehaviour
     {
         this.time++;
         UIupdate();
+        if (this.point - this.time == 0)
+        {
+            stop();
+        }
     }
-    // Update is called once per frame
 
-    // 물 충돌
+    // 물 충돌 OR 배터리 0% 로 인한 게임종료
     public void stop()
     {
         CancelInvoke("DecreaseBattery"); // 반복 호출 취소
