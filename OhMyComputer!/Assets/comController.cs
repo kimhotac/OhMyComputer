@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class comController : MonoBehaviour
 {
@@ -67,10 +68,13 @@ public class comController : MonoBehaviour
     // 2D충돌판정
     void OnTriggerEnter2D(Collider2D other)
     {
+
         //물인 경우
         if (other.gameObject.tag == "water")
         {
+            Debug.Log("지지직");
             this.director.GetComponent<GameDirector>().stop();
+            SceneManager.LoadScene("ClearBadScene");
         }
         // 나머지 경우
         else

@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Drawing;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class GameDirector : MonoBehaviour
@@ -34,13 +36,20 @@ public class GameDirector : MonoBehaviour
     {
         this.time++;
         UIupdate();
-        if (this.point - this.time == 0)
+        if (this.point >= 100) //배터리가 100보다 클떄
         {
             stop();
+            SceneManager.LoadScene("ClearGoodScene");
+        }
+        if (this.point - this.time == 0) //배터리 0일때
+        {
+            stop();
+            SceneManager.LoadScene("ClearBadScene2");
         }
     }
+   
 
-    // 물 충돌 OR 배터리 0% 로 인한 게임종료
+    // 물 충돌 OR 배터리 0% OR 배터리 완충으로 인한 게임종료
     public void stop()
     {
         CancelInvoke("DecreaseBattery"); // 반복 호출 취소
