@@ -5,6 +5,7 @@ using UnityEngine;
 
 public class dropitemcontroller : MonoBehaviour
 {
+    public float dropSpeed = -0.1f;
     GameObject com;
     // Start is called before the first frame update
     void Start()
@@ -15,7 +16,7 @@ public class dropitemcontroller : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        transform.Translate(0, -0.1f, 0);
+        transform.Translate(0, this.dropSpeed, 0);
 
         if(transform.position.y < -5.0f)
         {
