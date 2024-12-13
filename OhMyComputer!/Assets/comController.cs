@@ -8,6 +8,7 @@ public class comController : MonoBehaviour
     private Camera mainCamera;
     private Vector2 screenBounds;
     GameObject director;
+    GameObject hand;
     float speed = 0;
     Vector2 startPos;
     public AudioClip batterySE;  //충전소리
@@ -17,6 +18,7 @@ public class comController : MonoBehaviour
     void Start()
     {
         this.director = GameObject.Find("GameDirector");
+        this.hand = GameObject.Find("hand");
         mainCamera = Camera.main;
         screenBounds = mainCamera.ScreenToWorldPoint(new Vector3(Screen.width, Screen.height, mainCamera.transform.position.z));
         Application.targetFrameRate = 60;
@@ -49,15 +51,18 @@ public class comController : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.LeftArrow))
         {
             transform.Translate(-2,0,0);
+            this.hand.GetComponent<hand>().transform.Translate(-2, 0, 0);
         }
         //오른쪽 화살표가 눌렸을때
         if (Input.GetKeyDown(KeyCode.RightArrow))
         {
             transform.Translate(2,0,0);
+            this.hand.GetComponent<hand>().transform.Translate(-2, 0, 0);
         }
 
 
         transform.Translate(this.speed, 0, 0);  // 이동
+        this.hand.GetComponent<hand>().transform.Translate(this.speed, 0, 0);
         this.speed *= 0.98f;                    // 감속
 
         Vector3 objPosition = transform.position;
