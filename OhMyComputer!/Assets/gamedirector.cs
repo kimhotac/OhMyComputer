@@ -1,4 +1,4 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using System.Drawing;
 using UnityEngine;
@@ -12,7 +12,7 @@ public class GameDirector : MonoBehaviour
     GameObject itemGenerator;
     int point = 50;
     int time = 0;
-    //ÇöÀç ¹èÅÍ¸®´Â point - time
+    //í˜„ì¬ ë°°í„°ë¦¬ëŠ” point - time
 
     // Start is called before the first frame update
     void Start()
@@ -22,53 +22,64 @@ public class GameDirector : MonoBehaviour
         this.batteryUI_text = GameObject.Find("battery_text");
         this.itemGenerator = GameObject.Find("dropItemGenerator");
         UIupdate();
-        InvokeRepeating("DecreaseBattery", 1f, 1f); // 1ÃÊ ÈÄºÎÅÍ ¸ÅÃÊ¸¶´Ù ½ÇÇà
+        InvokeRepeating("DecreaseBattery", 1f, 1f); // 1ì´ˆ í›„ë¶€í„° ë§¤ì´ˆë§ˆë‹¤ ì‹¤í–‰
     }
+
     void Update()
     {
         this.itemGenerator.GetComponent<dropItemGenerator>().SetParameter(
-            -((float)(point - time) / 500f + 0.05f),// ¼Óµµ
-            0.75f - ((float)(point - time) / 1000) // È®·ü
+            (point - time) > 90 ? (0.002f * (point - time) - 0.37f) : -((point - time) / 1000f + 0.1f),// ì†ë„
+            (point - time) > 90 ? 0.80f : 0.75f - ((float)(point - time) / 1000) // í™•ë¥ 
             );
     }
 
-    // Àü±â Ãæµ¹
+    // ì „ê¸° ì¶©ëŒ
     public void Getelectric()
     {
         this.point += 3;
         UIupdate();
     }
 
-    // ½Ã°£ Áõ°¡
+    // ì‹œê°„ ì¦ê°€
     public void DecreaseBattery()
     {
         this.time++;
         UIupdate();
-        if (this.point - this.time >= 100) //¹èÅÍ¸®°¡ 100º¸´Ù Å¬‹š
-        {
+        if (this.point - this.time >= 100 || this.point - this.time == 0) //ë°°í„°ë¦¬ê°€ 100ë³´ë‹¤ í´ë–„
             stop();
-            SceneManager.LoadScene("ClearGoodScene");
-        }
-        if (this.point - this.time == 0) //¹èÅÍ¸® 0ÀÏ¶§
-        {
-            stop();
-            SceneManager.LoadScene("ClearBadScene2");
-        }
     }
 
 
-    // ¹° Ãæµ¹ OR ¹èÅÍ¸® 0% OR ¹èÅÍ¸® ¿ÏÃæÀ¸·Î ÀÎÇÑ °ÔÀÓÁ¾·á
+    //ê²Œì„ì¢…ë£Œ
     public void stop()
     {
-        CancelInvoke("DecreaseBattery"); // ¹İº¹ È£Ãâ Ãë¼Ò
-        Destroy(itemGenerator);
+        CancelInvoke("DecreaseBattery"); // ë°˜ë³µ í˜¸ì¶œ ì·¨ì†Œ
+        this.itemGenerator.GetComponent<dropItemGenerator>().gen_flag = false;
+        if (this.point - this.time >= 100) //ë°°í„°ë¦¬ê°€ 100ë³´ë‹¤ í´ë–„
+        {
+            PlayerPrefs.SetInt("Score", 1000 - time);
+            PlayerPrefs.Save();
+            SceneManager.LoadScene("ClearGoodScene");
+        }
+        else if (this.point - this.time == 0) //ë°°í„°ë¦¬ 0ì¼ë•Œ
+        {
+            PlayerPrefs.SetInt("Score", 0);
+            PlayerPrefs.Save();
+            SceneManager.LoadScene("ClearBadScene2");
+        }
+        else
+        {
+            PlayerPrefs.SetInt("Score", this.point - this.time);
+            PlayerPrefs.Save();
+            SceneManager.LoadScene("ClearBadScene");
+        }
     }
 
-    //UI ¾÷µ¥ÀÌÆ®
+    //UI ì—…ë°ì´íŠ¸
     void UIupdate()
     {
         this.batteryUI_img.GetComponent<Image>().fillAmount = (float)(this.point - this.time) / 100;
-        this.batteryUI_text.GetComponent<Text>().text = (this.point - this.time).ToString() + "%";
+        this.batteryUI_text.GetComponent<Text>().text = ((this.point - this.time) > 100 ? 100 : (this.point - this.time)).ToString() + "%";
     }
 }
 

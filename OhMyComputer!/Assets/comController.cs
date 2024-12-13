@@ -2,7 +2,6 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Rendering;
-using UnityEngine.SceneManagement;
 
 public class comController : MonoBehaviour
 {
@@ -11,7 +10,6 @@ public class comController : MonoBehaviour
     GameObject director;
     float speed = 0;
     Vector2 startPos;
-    public AudioClip elecSE;    //전기소리
     public AudioClip batterySE;  //충전소리
     public AudioClip comSE; 
     AudioSource aud;
@@ -83,7 +81,6 @@ public class comController : MonoBehaviour
         {
             Debug.Log("지지직");
             this.director.GetComponent<GameDirector>().stop();
-            SceneManager.LoadScene("ClearBadScene");
             
         }
         // 나머지 경우

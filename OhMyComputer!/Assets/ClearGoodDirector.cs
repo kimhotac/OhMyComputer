@@ -8,7 +8,9 @@ public class ClearGooddirector : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        int score = PlayerPrefs.GetInt("Score", 0); // 저장된 점수 불러오기, 기본값은 0
+        Debug.Log("Score from previous scene: " + score);
+
     }
 
     // Update is called once per frame

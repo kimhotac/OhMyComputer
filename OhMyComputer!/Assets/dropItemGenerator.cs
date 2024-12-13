@@ -6,6 +6,7 @@ public class dropItemGenerator : MonoBehaviour
 {
     public GameObject electricPrefab;
     public GameObject waterPrefab;
+    public bool gen_flag = true;
     float span = 0.6f;
     float delta = 0;
     float speed = -0.03f;
@@ -25,11 +26,12 @@ public class dropItemGenerator : MonoBehaviour
         this.speed = speed;
         this.rate = rate;
     }
+
     // Update is called once per frame
     void Update()
     {
         this.delta += Time.deltaTime;
-        if (this.delta > this.span)
+        if (this.delta > this.span && this.gen_flag)
         {
             this.delta = 0;
             if (this.waterProbability < 1.0f)
