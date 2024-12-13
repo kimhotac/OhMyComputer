@@ -12,13 +12,11 @@ public class GameDirector : MonoBehaviour
     GameObject itemGenerator;
     int point = 50;
     int time = 0;
-    GameObject generator;
     //현재 배터리는 point - time
 
     // Start is called before the first frame update
     void Start()
     {
-        this.generator = GameObject.Find("ItemGenerator");
         this.batteryUI_img = GameObject.Find("battery_img");
         this.batteryUI_text = GameObject.Find("battery_text");
         this.itemGenerator = GameObject.Find("dropItemGenerator");
@@ -29,27 +27,27 @@ public class GameDirector : MonoBehaviour
     {
         if (time < 10)
         {
-            this.generator.GetComponent<dropItemGenerator>().SetParameter(0.7f, -1.0f,1);
+            this.itemGenerator.GetComponent<dropItemGenerator>().SetParameter(0.7f, -0.1f,1);
         }
         else if (time < 20)
         {
-            this.generator.GetComponent<dropItemGenerator>().SetParameter(0.6f, -1.25f,4);
+            this.itemGenerator.GetComponent<dropItemGenerator>().SetParameter(0.6f, -0.25f,4);
         }
         else if (time < 30)
         {
-            this.generator.GetComponent<dropItemGenerator>().SetParameter(0.5f, -1.5f,5);
+            this.itemGenerator.GetComponent<dropItemGenerator>().SetParameter(0.5f, -0.5f,5);
         }
         else if (time < 40)
         {
-            this.generator.GetComponent<dropItemGenerator>().SetParameter(0.4f, -1.56f,6);
+            this.itemGenerator.GetComponent<dropItemGenerator>().SetParameter(0.4f, -0.56f,6);
         }
         else if (time < 50)
         {
-            this.generator.GetComponent<dropItemGenerator>().SetParameter(0.3f, -0.8f,7);
+            this.itemGenerator.GetComponent<dropItemGenerator>().SetParameter(0.3f, -0.8f,7);
         }
         else
         {
-            this.generator.GetComponent<dropItemGenerator>().SetParameter(0.2f, -0.9f,8);
+            this.itemGenerator.GetComponent<dropItemGenerator>().SetParameter(0.2f, -0.9f,8);
         }
     }
 
