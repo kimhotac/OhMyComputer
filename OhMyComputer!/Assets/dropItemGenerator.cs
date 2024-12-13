@@ -6,7 +6,7 @@ public class dropItemGenerator : MonoBehaviour
 {
     public GameObject electricPrefab;
     public GameObject waterPrefab;
-    float span = 1.0f;
+    float span = 0.6f;
     float delta = 0;
     float speed = -0.03f;
     float rate = 70f;
@@ -20,9 +20,8 @@ public class dropItemGenerator : MonoBehaviour
 
     }
 
-    public void SetParameter(float span, float speed, float rate)
+    public void SetParameter( float speed, float rate)
     {
-        this.span = span;
         this.speed = speed;
         this.rate = rate;
     }

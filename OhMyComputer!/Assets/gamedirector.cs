@@ -27,11 +27,9 @@ public class GameDirector : MonoBehaviour
     void Update()
     {
         this.itemGenerator.GetComponent<dropItemGenerator>().SetParameter(
-            0.6f,
-            -((float)(point - time) / 500f + 0.05f),
-            0.75f - ((float)(point - time) / 1000)
+            -((float)(point - time) / 500f + 0.05f),// 속도
+            0.75f - ((float)(point - time) / 1000) // 확률
             );
-        Debug.Log($"0.6f, {-((float)(point - time) / 500f + 0.05f)}, {0.75f - (float)(point - time) / 1000f}");
     }
 
     // 전기 충돌
@@ -46,7 +44,7 @@ public class GameDirector : MonoBehaviour
     {
         this.time++;
         UIupdate();
-        if (this.point >= 100) //배터리가 100보다 클떄
+        if (this.point - this.time >= 100) //배터리가 100보다 클떄
         {
             stop();
             SceneManager.LoadScene("ClearGoodScene");
