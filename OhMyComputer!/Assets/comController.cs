@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Rendering;
 using UnityEngine.SceneManagement;
 
 public class comController : MonoBehaviour
@@ -10,6 +11,10 @@ public class comController : MonoBehaviour
     GameObject director;
     float speed = 0;
     Vector2 startPos;
+    public AudioClip elecSE;    //전기소리
+    public AudioClip batterySE;  //충전소리
+    public AudioClip comSE; 
+    AudioSource aud;
 
     void Start()
     {
@@ -17,6 +22,7 @@ public class comController : MonoBehaviour
         mainCamera = Camera.main;
         screenBounds = mainCamera.ScreenToWorldPoint(new Vector3(Screen.width, Screen.height, mainCamera.transform.position.z));
         Application.targetFrameRate = 60;
+        this.aud = GetComponent<AudioSource>();
     }
 
     // Update is called once per frame
@@ -62,7 +68,10 @@ public class comController : MonoBehaviour
             || (objPosition.x < -screenBounds.x && this.speed < 0)) // 화면 바깥으로 나가게 되었을 경우
         {
             this.speed =-this.speed;
+            this.aud.PlayOneShot(this.comSE);
         }
+
+        GetComponent<AudioSource>().Play();
     }
 
     // 2D충돌판정
@@ -75,12 +84,15 @@ public class comController : MonoBehaviour
             Debug.Log("지지직");
             this.director.GetComponent<GameDirector>().stop();
             SceneManager.LoadScene("ClearBadScene");
+            
         }
         // 나머지 경우
         else
         {
             this.director.GetComponent<GameDirector>().Getelectric();
+            this.aud.PlayOneShot(this.batterySE);
         }
         Destroy(other.gameObject);
+
     }
 }
