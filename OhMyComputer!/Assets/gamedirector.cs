@@ -17,6 +17,7 @@ public class GameDirector : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        Application.targetFrameRate = 60;
         this.batteryUI_img = GameObject.Find("battery_img");
         this.batteryUI_text = GameObject.Find("battery_text");
         this.itemGenerator = GameObject.Find("dropItemGenerator");
@@ -25,36 +26,18 @@ public class GameDirector : MonoBehaviour
     }
     void Update()
     {
-        if (time < 10)
-        {
-            this.itemGenerator.GetComponent<dropItemGenerator>().SetParameter(0.7f, -0.1f,1);
-        }
-        else if (time < 20)
-        {
-            this.itemGenerator.GetComponent<dropItemGenerator>().SetParameter(0.6f, -0.25f,4);
-        }
-        else if (time < 30)
-        {
-            this.itemGenerator.GetComponent<dropItemGenerator>().SetParameter(0.5f, -0.5f,5);
-        }
-        else if (time < 40)
-        {
-            this.itemGenerator.GetComponent<dropItemGenerator>().SetParameter(0.4f, -0.56f,6);
-        }
-        else if (time < 50)
-        {
-            this.itemGenerator.GetComponent<dropItemGenerator>().SetParameter(0.3f, -0.8f,7);
-        }
-        else
-        {
-            this.itemGenerator.GetComponent<dropItemGenerator>().SetParameter(0.2f, -0.9f,8);
-        }
+        this.itemGenerator.GetComponent<dropItemGenerator>().SetParameter(
+            0.6f,
+            -((float)(point - time) / 500f + 0.05f),
+            0.75f - ((float)(point - time) / 1000)
+            );
+        Debug.Log($"0.6f, {-((float)(point - time) / 500f + 0.05f)}, {0.75f - (float)(point - time) / 1000f}");
     }
 
     // 전기 충돌
     public void Getelectric()
     {
-        this.point += 2;
+        this.point += 3;
         UIupdate();
     }
 
@@ -74,7 +57,7 @@ public class GameDirector : MonoBehaviour
             SceneManager.LoadScene("ClearBadScene2");
         }
     }
-   
+
 
     // 물 충돌 OR 배터리 0% OR 배터리 완충으로 인한 게임종료
     public void stop()

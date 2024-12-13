@@ -9,7 +9,7 @@ public class dropItemGenerator : MonoBehaviour
     float span = 1.0f;
     float delta = 0;
     float speed = -0.03f;
-    int itemCount = 1;
+    float rate = 70f;
 
     float waterProbability = 0.0f; // 물 아이템 초기 확률 (0%)
     float waterProbabilityIncreaseRate = 2; // 매초 물 아이템 확률 증가율
@@ -20,11 +20,11 @@ public class dropItemGenerator : MonoBehaviour
 
     }
 
-    public void SetParameter(float span, float speed, int itemCount)
+    public void SetParameter(float span, float speed, float rate)
     {
         this.span = span;
         this.speed = speed;
-        this.itemCount = itemCount; // 아이템 수량 설정
+        this.rate = rate;
     }
     // Update is called once per frame
     void Update()
@@ -35,12 +35,9 @@ public class dropItemGenerator : MonoBehaviour
             this.delta = 0;
             if (this.waterProbability < 1.0f)
                 this.waterProbability += waterProbabilityIncreaseRate;
-
-            for (int i = 0; i < this.itemCount; i++) // 설정된 수량만큼 아이템 생성
-            {
                 float randomValue = Random.value; // 0.0f ~ 1.0f 사이의 값
 
-                if (randomValue < 0.7f) // 70%
+                if (randomValue < this.rate) // 70%
                 {
                     GameObject et = Instantiate(electricPrefab);
                     int px = Random.Range(-6, 7);
@@ -54,7 +51,7 @@ public class dropItemGenerator : MonoBehaviour
                     wt.transform.position = new Vector3(wx, 7, 0);
                     wt.GetComponent<dropitemcontroller>().dropSpeed = this.speed;
                 }
-            }
+            
         }
     }
 }
