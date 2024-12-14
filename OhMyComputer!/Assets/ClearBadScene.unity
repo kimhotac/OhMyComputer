@@ -200,8 +200,8 @@ Transform:
   m_GameObject: {fileID: 391534879}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: 0.40754366, z: -0, w: 0.9131857}
-  m_LocalPosition: {x: -0.07668221, y: 2.8119977, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalPosition: {x: 0.0224, y: 3.4317, z: -0.1105}
+  m_LocalScale: {x: 1.1381152, y: 0.66135216, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -216,8 +216,9 @@ GameObject:
   m_Component:
   - component: {fileID: 1112129896}
   - component: {fileID: 1112129895}
+  - component: {fileID: 1112129897}
   m_Layer: 0
-  m_Name: electric (1)
+  m_Name: electric1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -284,12 +285,24 @@ Transform:
   m_GameObject: {fileID: 1112129894}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -4.2462935, y: 2.2112918, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalPosition: {x: -4, y: 2, z: 0}
+  m_LocalScale: {x: 1.0855, y: 1.0299, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1112129897
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1112129894}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 447cf3fb0ef70d94d8c31ddaec197625, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1539859246
 GameObject:
   m_ObjectHideFlags: 0
@@ -370,8 +383,8 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
+  m_LocalScale: {x: 3, y: 3, z: 3}
+  m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -482,7 +495,7 @@ GameObject:
   - component: {fileID: 1727914174}
   - component: {fileID: 1727914173}
   m_Layer: 0
-  m_Name: electric
+  m_Name: electric2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -549,8 +562,8 @@ Transform:
   m_GameObject: {fileID: 1727914172}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0.44424376, z: -0, w: 0.895906}
-  m_LocalPosition: {x: 4.09, y: 0.58585024, z: 1.67}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalPosition: {x: 4, y: 0.6, z: 2}
+  m_LocalScale: {x: 1.4001, y: 0.9801, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -635,7 +648,7 @@ Camera:
   m_Enabled: 1
   serializedVersion: 2
   m_ClearFlags: 1
-  m_BackGroundColor: {r: 0.19215687, g: 0.3019608, b: 0.4745098, a: 0}
+  m_BackGroundColor: {r: 0.21509439, g: 0.21509439, b: 0.21509439, a: 0}
   m_projectionMatrixMode: 1
   m_GateFitMode: 2
   m_FOVAxisMode: 0
@@ -699,5 +712,5 @@ SceneRoots:
   - {fileID: 1539859248}
   - {fileID: 1768315059}
   - {fileID: 391534881}
-  - {fileID: 1727914174}
   - {fileID: 1112129896}
+  - {fileID: 1727914174}
