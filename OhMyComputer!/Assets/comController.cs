@@ -12,11 +12,15 @@ public class comController : MonoBehaviour
     float speed = 0;
     Vector2 startPos;
     public AudioClip batterySE;  //충전소리
-    public AudioClip comSE; 
+    public AudioClip comSE;
+    private Animator animator;  // Animator 컴포넌트
+    SpriteRenderer spriteRenderer;
     AudioSource aud;
 
     void Start()
     {
+        this.animator = GetComponent<Animator>();
+        spriteRenderer = GetComponent<SpriteRenderer>();
         this.director = GameObject.Find("GameDirector");
         this.hand = GameObject.Find("hand");
         mainCamera = Camera.main;
@@ -60,6 +64,25 @@ public class comController : MonoBehaviour
             this.hand.GetComponent<hand>().transform.Translate(-2, 0, 0);
         }
 
+        Debug.Log(this.speed);
+        if (this.speed < -0.1f || 0.1 < this.speed)
+        {
+            animator.SetBool("move", true);
+            if (this.speed < 0)
+            {
+                spriteRenderer.flipX = false;
+            }
+            else
+            {
+                spriteRenderer.flipX = true;
+            }
+
+        }
+        else
+        {
+            animator.SetBool("move", false);
+        }
+
 
         transform.Translate(this.speed, 0, 0);  // 이동
         this.hand.GetComponent<hand>().transform.Translate(this.speed, 0, 0);
@@ -72,6 +95,7 @@ public class comController : MonoBehaviour
         {
             this.speed =-this.speed;
             this.aud.PlayOneShot(this.comSE);
+            animator.SetTrigger("bounce");
         }
 
         GetComponent<AudioSource>().Play();
@@ -93,6 +117,7 @@ public class comController : MonoBehaviour
         {
             this.director.GetComponent<GameDirector>().Getelectric();
             this.aud.PlayOneShot(this.batterySE);
+            animator.SetTrigger("getE");
         }
         Destroy(other.gameObject);
 
