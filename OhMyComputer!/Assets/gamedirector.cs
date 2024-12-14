@@ -10,7 +10,7 @@ public class GameDirector : MonoBehaviour
     GameObject batteryUI_img;
     GameObject batteryUI_text;
     GameObject itemGenerator;
-    int point = 50;
+    int point = 10;
     int time = 0;
     //현재 배터리는 point - time
 
@@ -36,7 +36,7 @@ public class GameDirector : MonoBehaviour
     // 전기 충돌
     public void Getelectric()
     {
-        this.point += 3;
+        this.point += 4;
         UIupdate();
     }
 

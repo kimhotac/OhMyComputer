@@ -64,7 +64,7 @@ public class comController : MonoBehaviour
             this.hand.GetComponent<hand>().transform.Translate(-2, 0, 0);
         }
 
-        Debug.Log(this.speed);
+
         if (this.speed < -0.1f || 0.1 < this.speed)
         {
             animator.SetBool("move", true);
