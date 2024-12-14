@@ -41,14 +41,14 @@ public class dropItemGenerator : MonoBehaviour
                 if (randomValue < this.rate) // 70%
                 {
                     GameObject et = Instantiate(electricPrefab);
-                    int px = Random.Range(-6, 7);
+                    int px = Random.Range(-7, 7);
                     et.transform.position = new Vector3(px, 7, 0);
                     et.GetComponent<dropitemcontroller>().dropSpeed = this.speed;
                 }
                 else // 30% È®·ü
                 {
                     GameObject wt = Instantiate(waterPrefab);
-                    int wx = Random.Range(-6, 7);
+                    int wx = Random.Range(-7, 7);
                     wt.transform.position = new Vector3(wx, 7, 0);
                     wt.GetComponent<dropitemcontroller>().dropSpeed = this.speed;
                 }
