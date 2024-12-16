@@ -72,7 +72,7 @@ public class GameDirector : MonoBehaviour
         }
         else
         {
-            PlayerPrefs.SetInt("Score", this.point);
+            PlayerPrefs.SetInt("Score", this.point - this.time);
             PlayerPrefs.Save();
             SceneManager.LoadScene("ClearBadScene");
         }
