@@ -11,7 +11,7 @@ public class GameDirector : MonoBehaviour
     GameObject batteryUI_img;
     GameObject batteryUI_text;
     GameObject itemGenerator;
-    int point = 10;
+    int point = 3;
     int time = 0;
     GameObject finalPointUI_text; //최종 점수
     //현재 배터리는 point - time
