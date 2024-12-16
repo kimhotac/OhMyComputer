@@ -23,17 +23,8 @@ public class GameDirector : MonoBehaviour
         this.batteryUI_img = GameObject.Find("battery_img");
         this.batteryUI_text = GameObject.Find("battery_text");
         this.itemGenerator = GameObject.Find("dropItemGenerator");
-        this.finalPointUI_text = GameObject.Find("finalPoint_text");UIupdate();
         InvokeRepeating("DecreaseBattery", 1f, 1f); // 1초 후부터 매초마다 실행
         UIupdate();
-        if (this.finalPointUI_text == null)
-        {
-            Debug.LogError("finalPointUI_text 오브젝트를 찾을 수 없습니다. 이름을 확인하세요.");
-        }
-        else
-        {
-            this.finalPointUI_text.SetActive(false); // 처음에는 최종점수 안보이게 하기
-        }
     }
 
     void Update()
@@ -66,20 +57,17 @@ public class GameDirector : MonoBehaviour
     {
         CancelInvoke("DecreaseBattery"); // 반복 호출 취소
         this.itemGenerator.GetComponent<dropItemGenerator>().gen_flag = false;
-        this.finalPointUI_text.SetActive(true); // 결과 UI 활성화
 
         if (this.point - this.time >= 100) //배터리가 100보다 클떄
         {
             PlayerPrefs.SetInt("Score", 1000 - this.time);
             PlayerPrefs.Save();
-            Debug.Log("Loading Scene: ClearGoodScene"); 
             SceneManager.LoadScene("ClearGoodScene");
         }
         else if (this.point - this.time == 0) //배터리 0일때
         {
             PlayerPrefs.SetInt("Score", 0);
             PlayerPrefs.Save();
-            Debug.Log("Loading Scene: ClearBadScene2"); 
             SceneManager.LoadScene("ClearBadScene2");
         }
         else
@@ -87,7 +75,6 @@ public class GameDirector : MonoBehaviour
             float score = 0.0f + this.point - this.time; // 점수 계산
             PlayerPrefs.SetString("Score", score.ToString()); // 문자열로 저장
             PlayerPrefs.Save();
-            Debug.Log("Loading Scene: ClearBadScene2");
             SceneManager.LoadScene("ClearBadScene");
         }
     }
