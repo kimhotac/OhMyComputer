@@ -72,8 +72,7 @@ public class GameDirector : MonoBehaviour
         }
         else
         {
-            float score = 0.0f + this.point - this.time; // 점수 계산
-            PlayerPrefs.SetString("Score", score.ToString()); // 문자열로 저장
+            PlayerPrefs.SetInt("Score", this.point);
             PlayerPrefs.Save();
             SceneManager.LoadScene("ClearBadScene");
         }
