@@ -70,7 +70,7 @@ public class GameDirector : MonoBehaviour
 
         if (this.point - this.time >= 100) //배터리가 100보다 클떄
         {
-            PlayerPrefs.SetInt("Score", 1000 - time);
+            PlayerPrefs.SetInt("Score", 1000 - this.time);
             PlayerPrefs.Save();
             Debug.Log("Loading Scene: ClearGoodScene"); 
             SceneManager.LoadScene("ClearGoodScene");
@@ -84,11 +84,11 @@ public class GameDirector : MonoBehaviour
         }
         else
         {
-            PlayerPrefs.SetInt("Score", this.point - this.time);
+            float score = 0.0f + this.point - this.time; // 점수 계산
+            PlayerPrefs.SetString("Score", score.ToString()); // 문자열로 저장
             PlayerPrefs.Save();
             Debug.Log("Loading Scene: ClearBadScene2");
             SceneManager.LoadScene("ClearBadScene");
-
         }
     }
 
