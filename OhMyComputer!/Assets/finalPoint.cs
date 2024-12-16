@@ -11,13 +11,6 @@ public class finalPoint : MonoBehaviour
         int score = PlayerPrefs.GetInt("Score", 0);
 
         // UI 텍스트에 점수를 표시합니다.
-        if (finalPoint_Text != null)
-        {
-            finalPoint_Text.text = "Score: " + score.ToString();
-        }
-        else
-        {
-            Debug.LogError("ScoreText가 연결되지 않았습니다. Inspector에서 연결하세요.");
-        }
+        finalPoint_Text.text = "Score: " + score.ToString();
     }
 }
