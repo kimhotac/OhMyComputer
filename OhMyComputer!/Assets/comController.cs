@@ -6,7 +6,7 @@ using UnityEngine.Rendering;
 public class comController : MonoBehaviour
 {
     private Camera mainCamera;
-    private Vector2 screenBounds;
+    private float screenBounds;
     GameObject director;
     GameObject hand;
     float speed = 0;
@@ -29,7 +29,7 @@ public class comController : MonoBehaviour
         this.director = GameObject.Find("GameDirector");
         this.hand = GameObject.Find("hand");
         mainCamera = Camera.main;
-        screenBounds = mainCamera.ScreenToWorldPoint(new Vector3(Screen.width, Screen.height, mainCamera.transform.position.z));
+        screenBounds = mainCamera.orthographicSize * mainCamera.aspect;
         Application.targetFrameRate = 60;
         this.aud = GetComponent<AudioSource>();
         lineRenderer = gameObject.AddComponent<LineRenderer>();
@@ -100,8 +100,8 @@ public class comController : MonoBehaviour
 
         // 방향 전환
         Vector3 objPosition = transform.position;
-        if ((objPosition.x > screenBounds.x - this.objectHalfWidth && this.speed > 0)
-            || (objPosition.x < -screenBounds.x + this.objectHalfWidth && this.speed < 0)) // 화면 바깥으로 나가게 되었을 경우
+        if ((objPosition.x > screenBounds - this.objectHalfWidth && this.speed > 0)
+            || (objPosition.x < -screenBounds + this.objectHalfWidth && this.speed < 0)) // 화면 바깥으로 나가게 되었을 경우
         {
             this.speed = -this.speed;
             this.aud.PlayOneShot(this.comSE);
